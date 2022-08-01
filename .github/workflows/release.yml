@@ -39,7 +39,7 @@ jobs:
           echo "WEBGOAT_MAVEN_VERSION=${WEBGOAT_MAVEN_VERSION:1}" >> $GITHUB_ENV
       - name: Build with Maven
         run: |
-          mvn --no-transfer-progress versions:set -DnewVersion=${{ env.WEBGOAT_MAVEN_VERSION }}
+          mvn --no-transfer-progress versions:set -DnewVersion=${{ steps.tag.outputs.tag }}
           mvn --no-transfer-progress install -DskipTests
 
       - name: "Create release"
@@ -47,7 +47,7 @@ jobs:
         with:
           draft: false
           files: |
-            webgoat/target/webgoat-${{ env.WEBGOAT_MAVEN_VERSION }}.jar
+            webgoat/target/webgoat-${{ steps.tag.outputs.tag }}.jar
           body: |
             ## Version ${{ steps.tag.outputs.tag }}
 
@@ -74,35 +74,35 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  new_version:
-    permissions:
-      contents: write  # for Git to git push
-    if: github.repository == 'adracea/WebGoat'
-    name: Update development version
-    needs: [ release ]
-    runs-on: ubuntu-latest
-    environment:
-      name: release
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: develop
-          token: ${{ secrets.WEBGOAT_DEPLOYER_TOKEN }}
+  # new_version:
+  #   permissions:
+  #     contents: write  # for Git to git push
+  #   if: github.repository == 'adracea/WebGoat'
+  #   name: Update development version
+  #   needs: [ release ]
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: release
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         ref: develop
+  #         token: ${{ secrets.WEBGOAT_DEPLOYER_TOKEN }}
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          architecture: x64
+  #     - name: Set up JDK 17
+  #       uses: actions/setup-java@v3
+  #       with:
+  #         java-version: 17
+  #         architecture: x64
 
-      - name: Set version to next snapshot
-        run: |
-          mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT versions:commit
+  #     - name: Set version to next snapshot
+  #       run: |
+  #         mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT versions:commit
 
-      - name: Commit pom.xml
-        run: |
-          git config user.name webgoat-github
-          git config user.email owasp.webgoat@gmail.com
-          find . -name 'pom.xml' | xargs git add
-          git commit -m "Updating to the new development version"
-          git push
+  #     - name: Commit pom.xml
+  #       run: |
+  #         git config user.name adracea
+  #         git config user.email adracea@gmail.com
+  #         find . -name 'pom.xml' | xargs git add
+  #         git commit -m "Updating to the new development version"
+  #         git push
