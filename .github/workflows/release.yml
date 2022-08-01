@@ -48,7 +48,7 @@ jobs:
           draft: false
           tag_name: ${{ steps.tag.outputs.tag }}
           files: |
-            webgoat/target/webgoat-${{ steps.tag.outputs.tag }}.jar
+            WebGoat/target/webgoat-${{ steps.tag.outputs.tag }}.jar
           body: |
             ## Version ${{ steps.tag.outputs.tag }}
 
