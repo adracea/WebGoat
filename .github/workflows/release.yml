@@ -16,7 +16,7 @@ jobs:
 
       - name: "Get tag name"
         id: tag
-        uses: dawidd6/action-get-tag@v1
+        run: echo '::set-output name=tag::${{github.run_number}}'
 
       - name: Set up JDK 15
         uses: actions/setup-java@v3
