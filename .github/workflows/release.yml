@@ -5,7 +5,7 @@ on:
       - v*
 jobs:
   release:
-    if: github.repository == 'aldracea/WebGoat'
+    if: github.repository == 'adracea/WebGoat'
     name: Release WebGoat
     runs-on: ubuntu-latest
     environment:
@@ -76,7 +76,7 @@ jobs:
   new_version:
     permissions:
       contents: write  # for Git to git push
-    if: github.repository == 'aldracea/WebGoat'
+    if: github.repository == 'adracea/WebGoat'
     name: Update development version
     needs: [ release ]
     runs-on: ubuntu-latest

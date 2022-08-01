@@ -26,7 +26,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -45,7 +45,7 @@ jobs:
         run: mvn --no-transfer-progress package
 
   build:
-    if: github.repository == 'aldracea/WebGoat'
+    if: github.repository == 'adracea/WebGoat'
     runs-on: ubuntu-latest
     name: "Branch build"
     steps:
