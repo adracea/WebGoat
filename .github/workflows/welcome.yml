@@ -16,6 +16,6 @@ jobs:
       - name: "SBOM With WhiteSource"
         run: |
           pip install ws-sbom-generator
-          cd /usr/local/lib/python3.8/dist-packages
+          cd /usr/lib/python3/site-packages
           ls -la
-          python /usr/local/lib/python3.8/dist-packages/ws-sbom-generator/sbom-generator.py -u ${{secrets.WS_USER_KEY}} -k ${{secrets.WS_ORG_TOKEN}} -a https://saas.whitesourcesoftware.com -t JSON -s ${{secrets.WS_PROJECT_TOKEN}} -y product -o /home/runner/work/WebGoat/WebGoat/target/ -on webgoat-${{ steps.tag.outputs.tag }}.json
+          python /usr/lib/python3/site-packages/ws-sbom-generator/sbom-generator.py -u ${{secrets.WS_USER_KEY}} -k ${{secrets.WS_ORG_TOKEN}} -a https://saas.whitesourcesoftware.com -t JSON -s ${{secrets.WS_PROJECT_TOKEN}} -y product -o /home/runner/work/WebGoat/WebGoat/target/ -on webgoat-${{ steps.tag.outputs.tag }}.json
