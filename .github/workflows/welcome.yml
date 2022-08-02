@@ -7,8 +7,8 @@ on:
       - develop
 
 jobs:
-  greeting:
-    if: github.repository == 'aldracea/WebGoat'
+  build:
+    if: github.repository == 'adracea/WebGoat'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
