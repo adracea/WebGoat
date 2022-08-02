@@ -1,17 +1,21 @@
 name: Welcome
 
 on:
-  issues:
-    types:
-      - opened
+  push:
+    branches:
+      - main
+      - develop
 
 jobs:
   greeting:
     if: github.repository == 'aldracea/WebGoat'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/first-interaction@v1.1.0
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-message: 'Thanks for submitting your first issue, we will have a look as quickly as possible.'
-          pr-message: 'Thanks so much for your contribution, really appreciated! We will have a look and merge it if everything checks out!'
+      - uses: actions/checkout@v3
+      
+      - name: "SBOM With WhiteSource"
+        run: |
+          pip install ws-sbom-generator
+          cd /usr/lib/python3/dist-packages
+          ls -la
+          python /usr/lib/python3/dist-packages/ws-sbom-generator/sbom-generator.py -u ${{secrets.WS_USER_KEY}} -k ${{secrets.WS_ORG_TOKEN}} -a https://saas.whitesourcesoftware.com -t JSON -s ${{secrets.WS_PROJECT_TOKEN}} -y product -o /home/runner/work/WebGoat/WebGoat/target/ -on webgoat-${{ steps.tag.outputs.tag }}.json

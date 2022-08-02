@@ -1,9 +1,9 @@
 name: "Release Pipeline"
-on:
-  push:
-    branches:
-      - main
-      - develop
+# on:
+#   push:
+#     branches:
+#       - main
+#       - develop
 jobs:
   release:
     if: github.repository == 'adracea/WebGoat'
