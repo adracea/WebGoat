@@ -1,16 +1,16 @@
 name: "Release Pipeline"
-# on:
-#   push:
-#     branches:
-#       - main
-#       - develop
+on:
+  push:
+    branches:
+      - main
+      - develop
 jobs:
   release:
     if: github.repository == 'adracea/WebGoat'
     name: Release WebGoat
     runs-on: ubuntu-latest
-    environment:
-      name: release
+    # environment:
+    #   name: release
     steps:
       - uses: actions/checkout@v3
 
@@ -52,10 +52,12 @@ jobs:
           projectName: test1 # optional
           # Filename of whitesource configuration if being used (including file path)
           agentConfig: ./agent.conf
+      
       - name: "SBOM With WhiteSource"
         run: |
           pip install ws-sbom-generator
-          python /usr/lib/python3/dist-packages/ws-sbom-generator/sbom-generator.py -u ${{secrets.WS_USER_KEY}} -k ${{secrets.WS_ORG_TOKEN}} -a https://saas.whitesourcesoftware.com -t JSON -s ${{secrets.WS_PROJECT_TOKEN}} -y product -o /home/runner/work/WebGoat/WebGoat/target/ -on webgoat-${{ steps.tag.outputs.tag }}.json
+          var=$(pip show ws-sbom-generator | grep Location: | sed -n -e 's/Location: //p')/ws_sbom_generator/sbom_generator.py
+          python $var -u ${{secrets.WS_USER_KEY}} -k ${{secrets.WS_ORG_TOKEN}} -a https://saas.whitesourcesoftware.com -t json -s ${{secrets.WS_PROJECT_TOKEN}} -y product -o /home/runner/work/WebGoat/WebGoat/target/ -on webgoat-${{ steps.tag.outputs.tag }}.json
       - name: Build with Maven
         run: |
           mvn --no-transfer-progress versions:set -DnewVersion=${{ steps.tag.outputs.tag }}
