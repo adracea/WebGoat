@@ -48,6 +48,7 @@ jobs:
           apiKey: ${{secrets.WS_ORG_TOKEN}}
           # Name of the Product that this project falls under.
           productName: Sbom-test # optional
+          path: /home/runner/work/WebGoat/
           # Name of the Project. Repository name if not set. Default: Repository Name without owner.
           projectName: test1 # optional
           # Filename of whitesource configuration if being used (including file path)
