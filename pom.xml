@@ -6,7 +6,7 @@
     <groupId>org.owasp.webgoat</groupId>
     <artifactId>webgoat</artifactId>
     <packaging>jar</packaging>
-    <version>${ 1+1 }</version>
+    <version>${newVersion}</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
