@@ -6,7 +6,7 @@
     <groupId>org.owasp.webgoat</groupId>
     <artifactId>webgoat</artifactId>
     <packaging>jar</packaging>
-    <version>${{ steps.tag.outputs.tag }}</version>
+    <version>${ steps.tag.outputs.tag }</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
