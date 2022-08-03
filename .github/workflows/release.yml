@@ -16,7 +16,9 @@ jobs:
 
       - name: "Get tag name"
         id: tag
-        run: echo '::set-output name=tag::$(date +%Y%m%d).${{github.run_number}}'
+        run: |
+          tagvar=$(date +%Y%m%d)
+          echo '::set-output name=tag::$tagvar.${{github.run_number}}'
 
       - name: Set up JDK 15
         uses: actions/setup-java@v3
