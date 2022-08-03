@@ -70,7 +70,7 @@ jobs:
           tag_name: ${{ steps.tag.outputs.tag }}
           files: |
             /home/runner/work/WebGoat/WebGoat/target/webgoat-${{ steps.tag.outputs.tag }}.jar
-            /home/runner/work/WebGoat/WebGoat/target/webgoat-${{ steps.tag.outputs.tag }}.json
+            /home/runner/work/WebGoat/WebGoat/target/webgoat-${{ steps.tag.outputs.tag }}-SPDX-2.2.json
           body: |
             ## Version ${{ steps.tag.outputs.tag }}
 
