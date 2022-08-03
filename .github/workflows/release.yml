@@ -41,23 +41,26 @@ jobs:
           echo "WEBGOAT_TAG_VERSION=${{ steps.tag.outputs.tag }}" >> $GITHUB_ENV
           WEBGOAT_MAVEN_VERSION=${{ steps.tag.outputs.tag }}
           echo "WEBGOAT_MAVEN_VERSION=${WEBGOAT_MAVEN_VERSION:1}" >> $GITHUB_ENV
-      - name: Whitesource Scan
-        # You may pin to the exact commit or the version.
-        # uses: mercari/Whitesource-Scan-Action@3f1da7a9de1055f39f740a4f4aac24fa928eed30
-        uses: adracea/universalws@master
-        with:
-          # The relevent URL to your orgs WS Server. Can be found under the Integrate tab of your Whitesource dashboard (e.g. https://app-eu.whitesourcesoftware.com/agent).
-          wssUrl: https://saas.whitesourcesoftware.com
-          # API key from Whitesource.
-          apiKey: ${{secrets.WS_ORG_TOKEN}}
-          # Name of the Product that this project falls under.
-          productName: Sbom-test # optional
-          path: ${{github.WORKSPACE}}
-          # Name of the Project. Repository name if not set. Default: Repository Name without owner.
-          projectName: test1 # optional
-          # Filename of whitesource configuration if being used (including file path)
-          agentConfig: ./agent.conf
-      
+      # - name: Whitesource Scan
+      #   # You may pin to the exact commit or the version.
+      #   # uses: mercari/Whitesource-Scan-Action@3f1da7a9de1055f39f740a4f4aac24fa928eed30
+      #   uses: adracea/universalws@master
+      #   with:
+      #     # The relevent URL to your orgs WS Server. Can be found under the Integrate tab of your Whitesource dashboard (e.g. https://app-eu.whitesourcesoftware.com/agent).
+      #     wssUrl: https://saas.whitesourcesoftware.com
+      #     # API key from Whitesource.
+      #     apiKey: ${{secrets.WS_ORG_TOKEN}}
+      #     # Name of the Product that this project falls under.
+      #     productName: Sbom-test # optional
+      #     path: ${{github.WORKSPACE}}
+      #     # Name of the Project. Repository name if not set. Default: Repository Name without owner.
+      #     projectName: test1 # optional
+      #     # Filename of whitesource configuration if being used (including file path)
+      #     agentConfig: ./agent.conf
+      - name: "WS Scan"
+        run: |
+          curl -LJO  https://github.com/whitesource/unified-agent-distribution/releases/latest/download/wss-unified-agent.jar
+          java -jar wss-unified-agent.jar -apiKey ${{secrets.WS_ORG_TOKEN}} -c ./agent.conf -d ${{github.WORKSPACE}}
       - name: "SBOM With WhiteSource"
         run: |
           pip install ws-sbom-generator
