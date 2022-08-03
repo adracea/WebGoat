@@ -13,12 +13,14 @@ jobs:
     #   name: release
     steps:
       - uses: actions/checkout@v3
-
+      - name: "Set Var"
+        id: var
+        run: |
+          echo "TAGVAR=$(date +%Y%m%d)" >> $GITHUB_ENV
       - name: "Get tag name"
         id: tag
         run: |
-          export tagvar=$(date +%Y%m%d)
-          echo '::set-output name=tag::${tagvar}.${{github.run_number}}'
+          echo '::set-output name=tag::${{env.TAGVAR}}.${{github.run_number}}'
 
       - name: Set up JDK 15
         uses: actions/setup-java@v3
@@ -50,7 +52,7 @@ jobs:
           apiKey: ${{secrets.WS_ORG_TOKEN}}
           # Name of the Product that this project falls under.
           productName: Sbom-test # optional
-          path: /home/runner/work/WebGoat/WebGoat
+          path: ${{github.WORKSPACE}}
           # Name of the Project. Repository name if not set. Default: Repository Name without owner.
           projectName: test1 # optional
           # Filename of whitesource configuration if being used (including file path)
