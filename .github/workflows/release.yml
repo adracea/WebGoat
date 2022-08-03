@@ -65,7 +65,7 @@ jobs:
         run: |
           pip install ws-sbom-generator
           var=$(pip show ws-sbom-generator | grep Location: | sed -n -e 's/Location: //p')/ws_sbom_generator/sbom_generator.py
-          sleep 20
+          sleep 30
           python $var -u ${{secrets.WS_USER_KEY}} -k ${{secrets.WS_ORG_TOKEN}} -a https://saas.whitesourcesoftware.com -t json -s ${{secrets.WS_PROJECT_TOKEN}} -y product -o /home/runner/work/WebGoat/WebGoat/target/ -on webgoat-${{ steps.tag.outputs.tag }}
       - name: Build with Maven
         run: |
