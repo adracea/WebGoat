@@ -40,7 +40,7 @@ jobs:
         run: |
           echo "WEBGOAT_TAG_VERSION=${{ steps.tag.outputs.tag }}" >> $GITHUB_ENV
           WEBGOAT_MAVEN_VERSION=${{ steps.tag.outputs.tag }}
-          echo "WEBGOAT_MAVEN_VERSION=${WEBGOAT_MAVEN_VERSION:1}" >> $GITHUB_ENV
+          echo "WEBGOAT_MAVEN_VERSION=${{ steps.tag.outputs.tag }}" >> $GITHUB_ENV
       # - name: Whitesource Scan
       #   # You may pin to the exact commit or the version.
       #   # uses: mercari/Whitesource-Scan-Action@3f1da7a9de1055f39f740a4f4aac24fa928eed30
