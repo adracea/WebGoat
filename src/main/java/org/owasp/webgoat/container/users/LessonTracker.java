@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * <p>
  * Getting Source ==============
  * <p>
- * Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software
+ * Source for this application is maintained at https://github.com/adracea/WebGoat, a repository for free software
  * projects.
  *
  * @author Bruce Mayhew <a href="http://code.google.com/p/webgoat">WebGoat</a>

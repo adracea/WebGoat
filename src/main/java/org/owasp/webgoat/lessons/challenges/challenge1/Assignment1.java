@@ -34,7 +34,7 @@ import static org.owasp.webgoat.lessons.challenges.SolutionConstants.PASSWORD;
  * <p>
  * Getting Source ==============
  * <p>
- * Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software
+ * Source for this application is maintained at https://github.com/adracea/WebGoat, a repository for free software
  * projects.
  * <p>
  *

@@ -43,7 +43,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * <p>
  * Getting Source ==============
  * <p>
- * Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software
+ * Source for this application is maintained at https://github.com/adracea/WebGoat, a repository for free software
  * projects.
  * <p>
  */

@@ -65,7 +65,8 @@ jobs:
         run: |
           pip install ws-sbom-generator
           var=$(pip show ws-sbom-generator | grep Location: | sed -n -e 's/Location: //p')/ws_sbom_generator/sbom_generator.py
-          python $var -u ${{secrets.WS_USER_KEY}} -k ${{secrets.WS_ORG_TOKEN}} -a https://saas.whitesourcesoftware.com -t json -s ${{secrets.WS_PROJECT_TOKEN}} -y product -o /home/runner/work/WebGoat/WebGoat/target/ -on webgoat-${{ steps.tag.outputs.tag }}
+          sleep 20
+          python $var -u ${{secrets.WS_USER_KEY}} -k ${{secrets.WS_ORG_TOKEN}} -a https://saas.whitesourcesoftware.com -t json -s ${{secrets.WS_PROJECT_TOKEN}} -y product -o /home/runner/work/adracea/WebGoat/target/ -on webgoat-${{ steps.tag.outputs.tag }}
       - name: Build with Maven
         run: |
           mvn --no-transfer-progress versions:set -DnewVersion=${{ steps.tag.outputs.tag }}
@@ -77,8 +78,8 @@ jobs:
           draft: false
           tag_name: ${{ steps.tag.outputs.tag }}
           files: |
-            /home/runner/work/WebGoat/WebGoat/target/webgoat-${{ steps.tag.outputs.tag }}.jar
-            /home/runner/work/WebGoat/WebGoat/target/webgoat-${{ steps.tag.outputs.tag }}-SPDX-2.2.json
+            /home/runner/work/adracea/WebGoat/target/webgoat-${{ steps.tag.outputs.tag }}.jar
+            /home/runner/work/adracea/WebGoat/target/webgoat-${{ steps.tag.outputs.tag }}-SPDX-2.2.json
           body: |
             ## Version ${{ steps.tag.outputs.tag }}
 
@@ -88,7 +89,7 @@ jobs:
 
             ### Bug fixes
 
-            - [#743 - Character encoding errors](https://github.com/WebGoat/WebGoat/issues/743)
+            - [#743 - Character encoding errors](https://github.com/adracea/WebGoat/issues/743)
 
 
             ## Contributors

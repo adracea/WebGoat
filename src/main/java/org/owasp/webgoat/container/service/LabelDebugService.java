@@ -24,7 +24,7 @@
  * Getting Source ==============
  * <p>
  * Source for this application is maintained at
- * https://github.com/WebGoat/WebGoat, a repository for free software projects.
+ * https://github.com/adracea/WebGoat, a repository for free software projects.
  */
 
 package org.owasp.webgoat.container.service;

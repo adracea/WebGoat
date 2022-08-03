@@ -32,7 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
  * <p>
  * Getting Source ==============
  * <p>
- * Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository
+ * Source for this application is maintained at https://github.com/adracea/WebGoat, a repository
  * for free software projects.
  *
  * @author Jeff Williams
